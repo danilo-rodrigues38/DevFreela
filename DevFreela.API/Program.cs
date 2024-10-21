@@ -1,3 +1,4 @@
+using DevFreela.Application.Commands.CreateProject;
 using DevFreela.Application.Services.Implemantations;
 using DevFreela.Application.Services.Interfaces;
 using DevFreela.Infrastructure.Persistence;
@@ -7,7 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<DevFreelaDbContext> ( options => options.UseSqlServer ( builder.Configuration.GetConnectionString ( "DevFreelaCs" ) ) );
-builder.Services.AddScoped<IProjectService, ProjectService>();
+
+builder.Services.AddMediatR ( cfg => cfg.RegisterServicesFromAssemblies ( typeof ( CreateProjectCommand ).Assembly ) );
 
 builder.Services.AddControllers ( );
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
