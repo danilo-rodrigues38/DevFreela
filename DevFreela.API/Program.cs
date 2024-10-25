@@ -1,3 +1,4 @@
+using DevFreela.API.Filters;
 using DevFreela.Application.Commands.CreateProject;
 using DevFreela.Application.Validators;
 using DevFreela.Core.Repositories;
@@ -18,7 +19,10 @@ builder.Services.AddScoped<ISkillRepository, SkillRepository> ( );
 
 builder.Services.AddMediatR ( cfg => cfg.RegisterServicesFromAssemblies ( typeof ( CreateProjectCommand ).Assembly ) );
 
-builder.Services.AddControllers ( );
+builder.Services.AddControllers (options =>
+{
+    options.Filters.Add<ValidationFilter> ( );
+} );
 builder.Services.AddFluentValidationAutoValidation ( );
 builder.Services.AddValidatorsFromAssemblyContaining<CreateProjectCommandValidator> ( );
 
