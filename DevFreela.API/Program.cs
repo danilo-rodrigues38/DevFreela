@@ -2,6 +2,8 @@ using DevFreela.API.Filters;
 using DevFreela.Application.Commands.CreateProject;
 using DevFreela.Application.Validators;
 using DevFreela.Core.Repositories;
+using DevFreela.Core.Services;
+using DevFreela.Infrastructure.Auth;
 using DevFreela.Infrastructure.Persistence;
 using DevFreela.Infrastructure.Persistence.Repositories;
 using FluentValidation;
@@ -16,6 +18,7 @@ builder.Services.AddDbContext<DevFreelaDbContext> ( options => options.UseSqlSer
 builder.Services.AddScoped<IProjectRepository, ProjectRepository> ( );
 builder.Services.AddScoped<IUserRepository, UserRepository> ( );
 builder.Services.AddScoped<ISkillRepository, SkillRepository> ( );
+builder.Services.AddScoped<IAuthService, AuthService> ( );
 
 builder.Services.AddMediatR ( cfg => cfg.RegisterServicesFromAssemblies ( typeof ( CreateProjectCommand ).Assembly ) );
 
